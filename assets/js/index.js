@@ -46,4 +46,9 @@ function load_table() {
 
 function play_bubble() {
   sound_bubble.play();
+
+  setTimeout(()=>{
+    sound_bubble.pause();
+    sound_bubble.currentTime = 0;
+  }, 250);
 }
