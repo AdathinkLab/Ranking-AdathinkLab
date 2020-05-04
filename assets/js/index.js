@@ -13,10 +13,19 @@ const data = [
 
 const path_images = "./assets/images";
 const sound_bubble = document.getElementById("bubble-sound");
+let current_selected = null;
 
 document.addEventListener("DOMContentLoaded", function (event) {
   load_table();
   sound_bubble.muted = false;
+});
+
+document.getElementById("body-ranking").addEventListener("mouseout", function (event) {
+    var x = event.clientX, y = event.clientY, elementMouseIsOver = document.elementFromPoint(x, y);
+
+    if(elementMouseIsOver.localName === "th" || elementMouseIsOver.localName === "div") {
+      current_selected = null
+    }
 });
 
 function load_table() {
@@ -26,7 +35,7 @@ function load_table() {
     class_place = index === 0 ? "first-place" : index === 1 ? "second-place" : index === 2 ? "third-place" : "";
     
     body_string += `
-    <tr class="ranking-row ${class_place}" onmouseover="play_bubble()">
+    <tr class="ranking-row ${class_place}" onmouseover="play_bubble(this);" onclick="active_fireworks(${index === 0})">
       <td>
         <span>
           <img src="${path_images}/code-${element[0]}.png" class="image-position">
@@ -44,11 +53,41 @@ function load_table() {
   body_ranking.innerHTML = body_string;
 }
 
-function play_bubble() {
-  sound_bubble.play();
+function play_bubble(me) {
+  if (current_selected !== me) {
+    current_selected = me;
 
-  setTimeout(()=>{
-    sound_bubble.pause();
-    sound_bubble.currentTime = 0;
-  }, 250);
+    sound_bubble.play();
+
+    setTimeout(() => {
+      sound_bubble.pause();
+      sound_bubble.currentTime = 0;
+    }, 250);
+  }
+}
+
+function active_fireworks(allowed) {
+  if (allowed) {
+    let i = 0;
+    element = document.getElementById("canvas");
+    element.classList.remove("display-none");
+    element.classList.add("display-block");
+
+    setTimeout(() => {
+      element.classList.remove("display-block");
+      element.classList.add("display-none");
+      element.style.opacity = 1;
+    }, 5000);
+
+    setTimeout(() => {
+      setInterval(function () {
+        if (i >= 10) {
+          clearInterval(k);
+        } else {
+          element.style.opacity = 1 - i / 10;
+          i++;
+        }
+      }, 100);
+    }, 3000);
+  }
 }
