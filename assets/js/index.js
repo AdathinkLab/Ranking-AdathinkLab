@@ -1,6 +1,6 @@
 
 const data = [
-  //Image,Position,Name,Total Kahoot,Puntos Kahoot,Total Retos,Puntos Retos,Puntos
+  //Image,Name,Total Kahoot,Puntos Kahoot,Total Retos,Puntos Retos,Puntos
 	["first",   "Jean Oscoso",                   2, 10, 2, 10, 20],
 	["second",  "Pao Huaripayta Gonzales",       2,  6, 1,  5, 11],
 	["third",   "Leyci Marleni Alarcon Machuca", 0,  0, 1,  5,  5],
