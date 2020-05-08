@@ -11,7 +11,7 @@ const data = [
 	["girl",    "Kriss Miñano",                  1,	 1,	0,	0,  1]
 ]
 
-const path_images = "./assets/images";
+const path_images = "./images";
 const sound_bubble = document.getElementById("bubble-sound");
 let current_selected = null;
 
@@ -79,7 +79,7 @@ function active_fireworks(allowed) {
       element.style.opacity = 1;
     }, 5000);
 
-    setTimeout(() => {
+    let k = setTimeout(() => {
       setInterval(function () {
         if (i >= 10) {
           clearInterval(k);
